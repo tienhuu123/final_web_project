@@ -12,7 +12,7 @@ let home = async (req, res, next) => {
 
     const address = `${req.body.address}, ${district.data.name},${ward.data.name},${city.data.name}`
     if (req.body.type == "code") {
-        let query = `insert into public.invoice (date, cart_id,status,user_id,phone,fullname,address) select to_timestamp(${new Date() / 1000}),id,0,'${req.session.user.username}','${req.body.phone}','${req.body.fullname}','${address}' from public.cart where user_id = '${req.session.user.username}' and status = 0 `
+        let query = `insert into public.invoice (date, cart_id,status,user_id,phone,fullname,address) select to_timestamp(${new Date() / 1000}),id,0,'${req.session.user.username}','${req.body.phone}','${req.body.fullname}','${address}' from public.cart where user_id = '${req.session.user.username}' and status = 0`
         let result = await connect.query(query)
         let query2 = `update public.cart set status = 1 where id= ${req.body.cartid}`
 
@@ -22,7 +22,7 @@ let home = async (req, res, next) => {
         let result4
         if (result5.rowCount > 0) {
             let updatequantity = result5.rows.reduce((init, item) => {
-                return init += `update public.product set quantity = quantity - ${item.product_quantity} where id = '${item.product_id}';`
+                return init += `update public.product set quantity = quantity - ${item.product_quantity} where id = '${item.product_id}'`;
             }, "")
             async function sendMail(from, to, subject, text, html) {
                 try {
@@ -68,6 +68,10 @@ let home = async (req, res, next) => {
 
     }
     if (req.body.type == "momo") {
+        let result5 = await connect.query(`select * from public.cart_detail as cd,public.product as p  where cd.cart_id= ${req.body.cartid} and cd.product_id = p.id`)
+        let total = result5.rows.reduce((init,item,i)=>{
+            return init+= item.product_quantity* item.price
+        },0)
         var partnerCode = "MOMO";
         var accessKey = "F8BBA842ECF85";
         var secretkey = "K951B6PE1waDMi640xX08PD3vg6EkVlz";
@@ -76,7 +80,7 @@ let home = async (req, res, next) => {
         var orderInfo = "pay with MoMo";
         var redirectUrl = `http://localhost:3000/success?cartid=${req.body.cartid}&address=${address}&phone=${req.body.phone}&fullname=${req.body.fullname}`;
         var ipnUrl = "https://callback.url/notify";
-        var amount = "50000";
+        var amount = total;
         var requestType = "captureWallet"
         var extraData = ""; //pass empty value if your merchant does not have stores
         //before sign HMAC SHA256 with format
@@ -134,4 +138,3 @@ let home = async (req, res, next) => {
     }
 }
 module.exports = home
-
