@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/fonts/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.min.css">
+
+
+    <title>Document</title>
+</head>
+
+<body>
+   <nav class="navbar">
+        <!-- Gán thanh điều hướng qua file nav.js -->
+        <div class="nav">
+            <a href="/"><img src="/public/image/logo.png" class="brand-logo" alt=""></a>
+            <div class="nav-items">
+
+
+                <div class="search">
+                    <form action="/search" method="get" id="search_form">
+                        <input type="text" name="search" class="search-box" placeholder="search brand, product">
+                        <button class="search-btn" onclick="handlesubmit()">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+
+
+
+                </div>
+
+                <div class="nav-icons">
+
+                    <a href="user/cartdetail"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <% if(typeof user=='undefined' ) { %>
+                        <a href="/login">Login</a>
+                        <% }else{ %>
+
+                            <%- (user.isAdmin ||user.isManager) ? "<a href='/admin/dashboard'>Dashboard</a>" :"" %>
+                                <a href="/profiledetail">
+                                    <%= user.username %>
+                                </a>
+                                <a href="/logout"> Logout</a>
+                                <% } %>
+                </div>
+            </div>
+        </div>
+        <ul class="links-container">
+            <li class="link-item "><a href="/" class="link ">home</a></li>
+            <li class="link-item "><a href="/product" class="link  ">product<a></li>
+            <li class="link-item"><a href="/blog" class="link">blog</a></li>
+            <li class="link-item"><a href="/contact" class="link">contact</a></li>
+
+        </ul>
+    </nav>
+    <section>
+        <div class="profile">
+            <div class="profile-detail">
+                <p>Fullname: <%= typeof user !=' undefined' ?user.fullname:"" %></p>
+                <p>Username: <%= typeof user !=' undefined' ?user.username:"" %></p>
+                <p>Email: <%= typeof user !=' undefined' ?user.email:""%></p>
+                <p>Password: <%= typeof user !=' undefined' ?user.password:"" %></p>
+                <p>Phone: <%= typeof user !=' undefined' ?user.phone:""%></p>
+             
+                <a class="btn-update" href="/user/profile">Update</a>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

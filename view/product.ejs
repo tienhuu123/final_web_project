@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/public/css/category.css">
+    <link rel="stylesheet" href="/public/fonts/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.min.css">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+
+
+    <title>Product</title>
+
+</head>
+
+<body>
+    <nav class="navbar">
+        <!-- Gán thanh điều hướng qua file nav.js -->
+        <div class="nav">
+            <a href="/"><img src="/public/image/logo.png" class="brand-logo" alt=""></a>
+
+            <div class="nav-items">
+
+
+                <div class="search">
+                    <form action="/search" method="get" id="search_form">
+                        <input type="text" name="search" class="search-box" placeholder="search brand, product">
+                        <button class="search-btn" onclick="handlesubmit()">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+
+
+
+                </div>
+
+                <div class="nav-icons">
+
+                    <a href="user/cartdetail"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <% if(typeof user=='undefined' ) { %>
+                        <a href="/login">Login</a>
+                        <% }else{ %>
+
+                            <%- (user.isAdmin ||user.isManager) ? "<a href='/admin/dashboard'>Dashboard</a>" :"" %>
+                                <a href="">
+                                    <%= user.username %>
+                                </a>
+                                <a href="/logout"> Logout</a>
+                                <% } %>
+                </div>
+            </div>
+        </div>
+        <ul class="links-container">
+            <li class="link-item "><a href="/" class="link ">home</a></li>
+            <li class="link-item "><a href="/product" class="link  ">product<a></li>
+            <li class="link-item"><a href="/blog" class="link">blog</a></li>
+            <li class="link-item"><a href="/contact" class="link">contact</a></li>
+
+        </ul>
+    </nav>
+
+    <div class="main-category">
+        <h1>New Category</h1>
+        <div class="filter-category">
+            <div class="category-header">
+                <ul>
+                    <div class="list-category active" id="all">
+                        <li value="">
+                            <a href="product">
+                                <i class="fa-solid fa-list"></i>
+                                All product
+                            </a>
+                        </li>
+                    </div>
+                    <% if(typeof category !='undefined' ) { if(quantitycate==0){%>
+
+                        <%= category%>
+                            <%}else{ category.map((cate,i)=>{%>
+                                <div class="list-category active" id="all">
+                                    <li value="">
+                                        <a href="product?cateid=<%= cate.id %>">
+                                            <%=cate.name %>
+                                        </a>
+                                    </li>
+                                </div>
+                                <%})}}%>
+                </ul>
+
+                <div class="w-full">
+                    <div class="flex flex-col w-full ">
+                        <ul class="">
+                            <li class="w-full text-black p-2  hover:text-center hover:bg-emerald-700 rounded-full"><a href="product?price=1"class="w-full ">From 0 to 1000:</a></li>
+                            <li class="w-full text-black p-2 hover:text-center hover:bg-emerald-700 rounded-full"><a href="product?price=2"class="w-full  ">From 0 to 1500:</a></li>
+                            <li class="w-full text-black p-2 hover:text-center hover:bg-emerald-700 rounded-full"><a href="product?price=3" class="w-full  ">From 0 to 2000:</a></li>
+                        </ul>
+                        
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="category-collect">
+                <div class="category-main-container">
+                    <!-- single post -->
+                    <% if(typeof product !='undefined' ) { if(quantitypro==0){%>
+
+                        <p>don't have any product</p>
+                        <%}else{ product.map((pro,i)=>{%>
+                            <div class="all product relative">
+                                <div class="category-img">
+
+                                    <img src="/<%= pro.image_url %>" style="max-width: 100%; height: 300px; " alt="">
+                                </div>
+                                <div class="bottom">
+                                    <div class="category-content">
+                                        <p>
+                                            <%= pro.name%>
+                                        </p>
+                                        <p>
+                                            <%= pro.price%>
+                                        </p>
+                                    </div>
+                                    <a href="/product_details?id=<%= pro.id  %>" class="read-btn">Buy Now</a>
+                                </div>
+                            </div>
+                            <%})}}%>
+                                <!-- <div class="all trousers">
+                        <div class="category-img">
+                            <img src="zp3.jpg" alt="post">
+                        </div>
+                        <div class="category-content">
+                            <div class="category-content-top">
+                                <a href="" class="Buy-Now">BUY NOW</a>
+                            </div>
+                            <h2>Zippo</h2>
+                            <p>Zipo Asa</p>
+                            <p>100$</p>
+                        </div>
+                        <button type="button" class="read-btn">Read All</button>
+                    </div>
+                    <div class="all shirt">
+                        <div class="category-img">
+                            <img src="zp4.jpg" alt="post">
+                        </div>
+                        <div class="category-content">
+                            <div class="category-content-top">
+                                <a href="" class="Buy-Now">BUY NOW</a>
+                            </div>
+                            <h2>Zippo</h2>
+                            <p>Zipo Asa</p>
+                            <p>100$</p>
+                        </div>
+                        <button type="button" class="read-btn">Read All</button>
+                    </div>
+                    <div class="all accessory">
+                        <div class="category-img">
+                            <img src="zp5.jpg" alt="post">
+                        </div>
+                        <div class="category-content">
+                            <div class="category-content-top">
+                                <a href="" class="Buy-Now">BUY NOW</a>
+                            </div>
+                            <h2>Zippo</h2>
+                            <p>Zipo Asa</p>
+                            <p>100$</p>
+                        </div>
+                        <button type="button" class="read-btn">Read All</button>
+                    </div>
+                    <div class="all shoes">
+                        <div class="category-img">
+                            <img src="zp6.jpg" alt="post">
+                        </div>
+                        <div class="category-content">
+                            <div class="category-content-top">
+                                <a href="" class="Buy-Now">BUY NOW</a>
+                            </div>
+                            <h2>Zippo</h2>
+                            <p>Zipo Asa</p>
+                            <p>100$</p>
+                        </div>
+                        <button type="button" class="read-btn">Read All</button>
+                    </div>
+                    <div class="all underwear">
+                        <div class="category-img">
+                            <img src="zp7.jpg" alt="post">
+                        </div>
+                        <div class="category-content">
+                            <div class="category-content-top">
+                                <a href="" class="Buy-Now">BUY NOW</a>
+                            </div>
+                            <h2>Zippo</h2>
+                            <p>Zipo Asa</p>
+                            <p>100$</p>
+                        </div>
+                        <button type="button" class="read-btn">Read All</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-logo">
+            <img src="/public/image/logo.png" class="logo" alt="">
+        </div>
+
+        <div class="footer-content">
+            <div class="footer-container">
+                <ul class="footer-desc">
+                    <h3 class="about-us-name">About</h3>
+                    <li class="about-us"><i class="fa-solid fa-location-dot"></i>142 Tân Qúy</li>
+                    <li class="about-us"><i class="fa-solid fa-phone"></i>+84 376328545</li>
+                    <li class="about-us"><i class="fa-brands fa-facebook"></i><a
+                            href="https://www.facebook.com/nams.phuongs.56/">facebook</a></li>
+                </ul>
+            </div>
+            <div class="footer-container">
+                <ul class="footer-desc">
+                    <h3 class="about-us-name">Hỗ trợ</h3>
+                    <li class="about-us"><a href="">Giới thiệu Butuni Shop</a></li>
+                    <li class="about-us"><a href="">Gửi yêu cầu hỗ trợ</a></li>
+
+                </ul>
+            </div>
+            <div class="footer-container">
+                <ul class="footer-desc">
+                    <h3 class="about-us-name">Chính sách</h3>
+                    <li class="about-us"><a href="">Chính sách thanh toán</a></li>
+                    <li class="about-us"><a href="">Chính sách bảo hành</a></li>
+
+                </ul>
+            </div>
+            <div class="footer-container">
+                <ul class="footer-desc">
+                    <h3 class="about-us-name">Hợp tác</h3>
+                    <li class="about-us"><a href="https://www.facebook.com/nams.phuongs.56/">Quy chế hoạt
+                            động</a></li>
+                    <li class="about-us"><a href="">Liên hệ bán hàng</a></li>
+
+                </ul>
+            </div>
+
+
+        </div>
+
+
+
+    </footer>
+
+
+</body>
+
+</html>

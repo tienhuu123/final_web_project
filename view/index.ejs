@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clo thing - Best Apparels Online Store</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/fonts/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/public/image/logo.png">
+
+    <style>
+
+    </style>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+
+</head>
+
+<body>
+    <!-- Thanh điều hướng  -->
+    <nav class="navbar">
+        <!-- Gán thanh điều hướng qua file nav.js -->
+        <div class="nav">
+            <a href="/"><img src="/public/image/logo.png" class="brand-logo" alt=""></a>
+            <div class="nav-items">
+
+
+                <div class="search ">
+                    <form action="/search" method="get" id="search_form" class="">
+                        <input type="text" name="search" class="search-box" placeholder="search brand, product">
+                        <button class="search-btn" onclick="handlesubmit()">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+
+
+
+                </div>
+
+                <div class="nav-icons">
+
+                    <a href="user/cartdetail"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <% if(typeof user=='undefined' ) { %>
+                        <a href="/login">Login</a>
+                        <% }else{ %>
+
+                            <%- (user.isAdmin ||user.isManager) ? "<a href='/admin/dashboard'>Dashboard</a>" :"" %>
+                                <a href="user/profiledetail">
+                                    <%= user.username %>
+                                </a>
+                                <a href="/logout"> Logout</a>
+                                <% } %>
+                </div>
+            </div>
+        </div>
+        <ul class="links-container">
+            <li class="link-item "><a href="/" class="link ">home</a></li>
+            <li class="link-item "><a href="/product" class="link  ">product<a></li>
+            <li class="link-item"><a href="/blog" class="link">blog</a></li>
+            <li class="link-item"><a href="/contact" class="link">contact</a></li>
+
+        </ul>
+    </nav>
+
+    <a href="addproduct"></a>
+    <a href="managerproduct"></a>
+    <a href="managercategory"></a>
+    <a href="manageruser"></a>
+    <a href="product"></a>
+    <a href="login"></a>
+    <a href="register"></a>
+    <a href="cart"></a>
+    <a href="checkout"></a>
+    <a href="dashboard"></a>
+    <a href="blog"></a>
+
+
+
+
+
+    <!-- Hero section -->
+    <header class="hero-section">
+        <div class="slider">
+            <img src="/public/image/header8.png" class="slide" alt="">
+            <img src="/public/image/header10.png" class="slide" alt="">
+            <img src="/public/image/header9.png" class="slide" alt="">
+            <img src="/public/image/header12.png" class="slide" alt="">
+            <img src="/public/image/header11.png" class="slide" alt="">
+
+
+            <p class="sub-heading"> </p>
+        </div>
+    </header>
+    <section class="section-service">
+
+        <div class="section-container">
+            <div class="service-content">
+                <div class="service-info">
+                    <p class="service-name">TP Fashion</p>
+                    <p class="service-desc">Welcome to my blog! In today's article, I would like to introduce to you a
+                        remarkable fashion sales website, TP Fashion.
+
+                        This website is where you can find a wide variety of fashion products from famous brands around
+                        the world. From
+                        backpacks, wallets, belts, you can find all you need to create your own fashion style.
+
+                        The products on this website are carefully selected to ensure quality and fashion. This makes it
+                        possible for you to
+                        find your favorite items to update your wardrobe.
+
+                        In addition, the site also offers many reasonable prices. You can enjoy the convenience of
+                        online shopping and have it
+                        delivered to your door in the shortest possible time.
+
+                        A special feature of this website is that it provides detailed information about the size,
+                        material and color of the
+                        product, making it easy for you to choose and avoid getting the wrong number. This helps you to
+                        shop with confidence and
+                        certainty.
+
+                        In short, TP Fashion is a great choice for fashion lovers who want to find quality products at
+                        reasonable prices. Visit
+                        this website now for the ultimate fashion shopping experience!!</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Card-container -->
+
+    <!-- Collection: Bộ sưu tập -->
+
+    <section class="product">
+
+        <h2 class="product-category">All Product</h2>
+
+
+        <div class="product-container">
+            <% if(typeof product !='undefined' ) { if(quantitypro==0){%>
+                <%= product%>
+                    <%}else{ product.map((pro,i)=>{%>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="/<%= pro.image_url %>" class="product-thumb" alt="">
+                                <a href="user/product_details?id=<%= pro.id  %>" class="card-btn">view all</a>
+                            </div>
+                            <div class="product-info">
+                                <h2 class="product-brand">
+                                    <%= pro.name%>
+                                </h2>
+                                <p class="product-short-des">
+                                    <%= pro.details%>
+                                </p>
+                                <span class="price">
+                                    <%= pro.price%>
+                                </span>
+                            </div>
+                        </div>
+                        <%})}}%>
+        </div>
+
+
+    </section>
+    <% if(typeof category !='undefined' ) {%>
+        <% category.map((cate,i)=>{ %>
+            <section class="product">
+                <h2 class="product-category">
+                    <%= cate.name %>
+                </h2>
+                <!-- <button class="previous-btn">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+
+                <button class="next-btn">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button> -->
+
+                <div class="product-container">
+                    <% product.map((pro,index)=>{%>
+                        <% if(pro.category_id==cate.id){ %>
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="/<%= pro.image_url %>" class="product-thumb" alt="">
+                                    <a href="/product_details?id=<%= pro.id  %>" class="card-btn">add to cart</a>
+                                </div>
+                                <div class="product-info">
+                                    <h2 class="product-brand">
+                                        <%= pro.name %>
+                                    </h2>
+                                    <p class="product-short-des">
+                                        <%= pro.details%>
+                                    </p>
+                                    <span class="price">
+                                        <%= pro.price%>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <% }%>
+                                <% })%>
+                </div>
+            </section>
+
+            <%})} %>
+                <script>
+                    let form = document.getElementById("search_form")
+                    console.log(1)
+                    const handlesubmit = (e) => {
+                        form.submit()
+                    }
+                </script>
+
+                <footer>
+                    <div class="footer-logo">
+                        <img src="/public/image/logo.png" class="logo" alt="">
+                    </div>
+
+                    <div class="footer-content">
+                        <div class="footer-container">
+                            <ul class="footer-desc">
+                                <h3 class="about-us-name">Contact</h3>
+                                <li class="about-us"><i class="fa-solid fa-location-dot"></i>142 Tan Quy Street, Tan Quy
+                                    Ward, Tan Phu District</li>
+                                <li class="about-us"><i class="fa-solid fa-phone"></i>+84 376328545</li>
+                                <li class="about-us"><i class="fa-brands fa-facebook"></i><a
+                                        href="https://www.facebook.com/nams.phuongs.56/">Facebook</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-container">
+                            <ul class="footer-desc">
+                                <h3 class="about-us-name">About</h3>
+                                <li class="about-us"><a href="">About TP Fashion</a></li>
+                                <li class="about-us"><a href="">Submit a support request</a></li>
+
+                            </ul>
+                        </div>
+                        <div class="footer-container">
+                            <ul class="footer-desc">
+                                <h3 class="about-us-name">Navigation</h3>
+                                <li class="about-us"><a href="">Home</a></li>
+                                <li class="about-us"><a href="">About</a></li>
+                                <li class="about-us"><a href="">Blog</a></li>
+                                <li class="about-us"><a href="">Contact</a></li>
+
+                            </ul>
+                        </div>
+                        <div class="footer-container">
+                            <ul class="footer-desc">
+                                <h3 class="about-us-name">Cooperate</h3>
+                                <li class="about-us"><a href="https://www.facebook.com/nams.phuongs.56/">Operational
+                                        Regulations</a></li>
+                                <li class="about-us"><a href="">Contact sales</a></li>
+
+                            </ul>
+                        </div>
+
+
+                    </div>
+
+
+
+                </footer>
+
+                <script src="/public/js/script.js">
+
+
+                </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/fonts/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <!-- Gán thanh điều hướng qua file nav.js -->
+        <div class="nav">
+            <a href="/"><img src="/public/image/logo.png" class="brand-logo" alt=""></a>
+            <div class="nav-items">
+
+
+                <div class="search">
+                    <form action="/search" method="get" id="search_form">
+                        <input type="text" name="search" class="search-box" placeholder="search brand, product">
+                        <button class="search-btn" onclick="handlesubmit()">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+
+
+
+                </div>
+
+                <div class="nav-icons">
+
+                    <a href="user/cartdetail"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <% if(typeof user=='undefined' ) { %>
+                        <a href="/login">Login</a>
+                        <% }else{ %>
+
+                            <%- (user.isAdmin ||user.isManager) ? "<a href='/admin/dashboard'>Dashboard</a>" :"" %>
+                                <a href="">
+                                    <%= user.username %>
+                                </a>
+                                <a href="/logout"> Logout</a>
+                                <% } %>
+                </div>
+            </div>
+        </div>
+        <ul class="links-container">
+            <li class="link-item "><a href="/" class="link ">home</a></li>
+            <li class="link-item "><a href="/product" class="link  ">product<a></li>
+            <li class="link-item"><a href="/blog" class="link">blog</a></li>
+            <li class="link-item"><a href="/contact" class="link">contact</a></li>
+
+        </ul>
+    </nav>
+
+    <section id="blog">
+        <div class="blog-heading">
+
+            <h3>Welcome to TP Fashion</h3>
+        </div>
+        <div class="blog-container">
+
+            <div class="blog-box">
+                <div class="blog-img">
+                    <img src="/public/image/header8.png" alt="Blog">
+                </div>
+                <div class="blog-text">
+                    <a href="" class="blog-title"></a>
+                    <p></a>
+                    <p>Welcome to my blog! In today's article, I would like to introduce to you a remarkable fashion
+                        sales website,
+                        TP
+                        Fashion.
+
+                        This website is where you can find a wide variety of fashion products from famous brands around
+                        the world.
+                        From
+                        backpacks, wallets, belts, you can find all you need to create your own fashion style.
+
+                        The products on this website are carefully selected to ensure quality and fashion. This makes it
+                        possible
+                        for you to
+                        find your favorite items to update your wardrobe.
+
+                        In addition, the site also offers many reasonable prices. You can enjoy the convenience of
+                        online shopping
+                        and have
+                        it
+                        delivered to your door in the shortest possible time.
+
+                        A special feature of this website is that it provides detailed information about the size,
+                        material and
+                        color of the
+                        product, making it easy for you to choose and avoid getting the wrong number. This helps you to
+                        shop with
+                        confidence
+                        and
+                        certainty.
+
+                        In short, TP Fashion is a great choice for fashion lovers who want to find quality products at
+                        reasonable
+                        prices.
+                        Visit
+                        this website now for the ultimate fashion shopping experience!!!
+                    </p>
+                    <a href="">Read More</a>
+                </div>
+            </div>
+
+            <div class="blog-box">
+                <div class="blog-img">
+                    <img src="/public/image/header8.png" alt="Blog">
+                </div>
+                <div class="blog-text">
+                    <a href="" class="blog-title"></a>
+                    <p></a>
+                    <p>Welcome to my blog! In today's article, I would like to introduce to you a remarkable fashion
+                        sales website, TP
+                        Fashion.
+
+                        This website is where you can find a wide variety of fashion products from famous brands around
+                        the world. From
+                        backpacks, wallets, belts, you can find all you need to create your own fashion style.
+
+                        The products on this website are carefully selected to ensure quality and fashion. This makes it
+                        possible for you to
+                        find your favorite items to update your wardrobe.
+
+                        In addition, the site also offers many reasonable prices. You can enjoy the convenience of
+                        online shopping and have
+                        it
+                        delivered to your door in the shortest possible time.
+
+                        A special feature of this website is that it provides detailed information about the size,
+                        material and color of the
+                        product, making it easy for you to choose and avoid getting the wrong number. This helps you to
+                        shop with confidence
+                        and
+                        certainty.
+
+                        In short, TP Fashion is a great choice for fashion lovers who want to find quality products at
+                        reasonable prices.
+                        Visit
+                        this website now for the ultimate fashion shopping experience!!!
+                    </p>
+                    <a href="">Read More</a>
+                </div>
+            </div>
+
+            <div class="blog-box">
+                <div class="blog-img">
+                    <img src="/public/image/header8.png" alt="Blog">
+                </div>
+                <div class="blog-text">
+                    <a href="" class="blog-title"></a>
+                    <p></a>
+                    <p>Welcome to my blog! In today's article, I would like to introduce to you a remarkable fashion
+                        sales website, TP
+                        Fashion.
+
+                        This website is where you can find a wide variety of fashion products from famous brands around
+                        the world. From
+                        backpacks, wallets, belts, you can find all you need to create your own fashion style.
+
+                        The products on this website are carefully selected to ensure quality and fashion. This makes it
+                        possible for you to
+                        find your favorite items to update your wardrobe.
+
+                        In addition, the site also offers many reasonable prices. You can enjoy the convenience of
+                        online shopping and have
+                        it
+                        delivered to your door in the shortest possible time.
+
+                        A special feature of this website is that it provides detailed information about the size,
+                        material and color of the
+                        product, making it easy for you to choose and avoid getting the wrong number. This helps you to
+                        shop with confidence
+                        and
+                        certainty.
+
+                        In short, TP Fashion is a great choice for fashion lovers who want to find quality products at
+                        reasonable prices.
+                        Visit
+                        this website now for the ultimate fashion shopping experience!!!
+                    </p>
+                    <a href="">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-logo">
+            <img src="/public/image/logo.png" class="logo" alt="">
+        </div>
+
+        <div class="footer-content">
+            <div class="footer-container">
+                <ul class="footer-desc">
+                    <h3 class="about-us-name">About</h3>
+                    <li class="about-us"><i class="fa-solid fa-location-dot"></i>142 Tân Qúy</li>
+                    <li class="about-us"><i class="fa-solid fa-phone"></i>+84 376328545</li>
+                    <li class="about-us"><i class="fa-brands fa-facebook"></i><a
+                            href="https://www.facebook.com/nams.phuongs.56/">facebook</a></li>
+                </ul>
+            </div>
+            <div class="footer-container">
+                <ul class="footer-desc">
+                    <h3 class="about-us-name">Hỗ trợ</h3>
+                    <li class="about-us"><a href="">Giới thiệu Butuni Shop</a></li>
+                    <li class="about-us"><a href="">Gửi yêu cầu hỗ trợ</a></li>
+
+                </ul>
+            </div>
+            <div class="footer-container">
+                <ul class="footer-desc">
+                    <h3 class="about-us-name">Chính sách</h3>
+                    <li class="about-us"><a href="">Chính sách thanh toán</a></li>
+                    <li class="about-us"><a href="">Chính sách bảo hành</a></li>
+
+                </ul>
+            </div>
+            <div class="footer-container">
+                <ul class="footer-desc">
+                    <h3 class="about-us-name">Hợp tác</h3>
+                    <li class="about-us"><a href="https://www.facebook.com/nams.phuongs.56/">Quy chế hoạt
+                            động</a></li>
+                    <li class="about-us"><a href="">Liên hệ bán hàng</a></li>
+
+                </ul>
+            </div>
+
+
+        </div>
+
+
+
+    </footer>
+</body>
+
+
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/invoice.css">
+    <link rel="stylesheet" href="/public/fonts/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.min.css">
+
+    <title>Cart</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <!-- Gán thanh điều hướng qua file nav.js -->
+        <div class="nav">
+            <a href="/"><img src="/public/image/logo.png" class="brand-logo" alt=""></a>
+            <div class="nav-items">
+                <div class="search">
+                    <input type="text" class="search-box" placeholder="search brand, product">
+                    <span><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <!-- <button class="search-btn">
+                    <i class="search-btn-icon fa-solid fa-magnifying-glass"></i>
+                
+                </button> -->
+
+                </div>
+
+                <div class="nav-icons">
+                
+                    <a href="user/cartdetail"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <% if(typeof user=='undefined' ) { %>
+                        <a href="/login">Login</a>
+                        <% }else{ %>
+                
+                            <%- (user.isAdmin ||user.isManager) ? "<a href='/admin/dashboard'>Dashboard</a>" :"" %>
+                                <a href="">
+                                    <%= user.username %>
+                                </a>
+                                <a href="/logout"> Logout</a>
+                                <% } %>
+                </div>
+            </div>
+        </div>
+        <ul class="links-container">
+            <li class="link-item "><a href="/" class="link ">home</a></li>
+            <li class="link-item "><a href="/product" class="link  ">product<a></li>
+            <li class="link-item"><a href="/blog" class="link">blog</a></li>
+            <li class="link-item"><a href="/contact" class="link">contact</a></li>
+        
+        </ul>
+    </nav>
+
+
+
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <title>History Cart</title>
+        <style>
+
+        </style>
+    </head>
+
+    
+        <div id="cart">
+            <h1>History Cart</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ma don hang</th>
+
+                        <th>Date</th>
+                        <th>Fullname</th>
+                        <th>Quantity</th>
+                        <th>Trạng thái</th>
+                        <th>Địa chỉ</th>
+                        <th>Total</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <% if(typeof invoice !='undefined' ){if(quantity==0){ %>
+                            <%}else{ invoice.map((invo,i)=>{%>
+
+                                <td>
+                                    <%= invo.id%>
+                                </td>
+                                <td>
+                                    <%= invo.date%>
+                                </td>
+                                <td>
+                                    <%= invo.fullname%>
+                                </td>
+                                <td>
+                                    <%= invo.sum%>
+                                </td>
+                                <td>
+
+                                    <%= invo.status==0?"Processing":invo.status==2?"Order has been cancelled":"Order confirmed"%>
+
+                                </td>
+
+
+                                <td>
+                                    <%= invo.address%>
+
+                                </td>
+                                <td>
+                                    <%= invo.sumtotal%>
+                                </td>
+
+                    </tr>
+                    <%})}}%>
+
+
+
+
+                </tbody>
+            </table>
+        </div>
+    
+
+    </html>
+<footer>
+    <div class="footer-logo">
+        <img src="/public/image/logo.png" class="logo" alt="">
+    </div>
+
+    <div class="footer-content">
+        <div class="footer-container">
+            <ul class="footer-desc">
+                <h3 class="about-us-name">About</h3>
+                <li class="about-us"><i class="fa-solid fa-location-dot"></i>142 Tân Qúy</li>
+                <li class="about-us"><i class="fa-solid fa-phone"></i>+84 376328545</li>
+                <li class="about-us"><i class="fa-brands fa-facebook"></i><a
+                        href="https://www.facebook.com/nams.phuongs.56/">facebook</a></li>
+            </ul>
+        </div>
+        <div class="footer-container">
+            <ul class="footer-desc">
+                <h3 class="about-us-name">Hỗ trợ</h3>
+                <li class="about-us"><a href="">Giới thiệu Butuni Shop</a></li>
+                <li class="about-us"><a href="">Gửi yêu cầu hỗ trợ</a></li>
+
+            </ul>
+        </div>
+        <div class="footer-container">
+            <ul class="footer-desc">
+                <h3 class="about-us-name">Chính sách</h3>
+                <li class="about-us"><a href="">Chính sách thanh toán</a></li>
+                <li class="about-us"><a href="">Chính sách bảo hành</a></li>
+
+            </ul>
+        </div>
+        <div class="footer-container">
+            <ul class="footer-desc">
+                <h3 class="about-us-name">Hợp tác</h3>
+                <li class="about-us"><a href="https://www.facebook.com/nams.phuongs.56/">Quy chế hoạt
+                        động</a></li>
+                <li class="about-us"><a href="">Liên hệ bán hàng</a></li>
+
+            </ul>
+        </div>
+
+
+    </div>
+
+
+
+</footer>
+</body>
+
+</html>

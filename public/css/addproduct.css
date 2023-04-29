@@ -1,0 +1,369 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* body {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    padding: 10px;
+    align-items: center;
+    background-color: rgb(126, 197, 230);
+} */
+
+.add_product {
+    width: 100%;
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+    margin-top: 150px;
+    display: block;
+}
+
+.add_product .title {
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.add_product .title::before {
+    content: '';
+    position: absolute;
+    left: 40%;
+    right: 40%;
+    top: 30px;
+    height: 1px;
+    width: 20%;
+    background: black;
+}
+
+.add_product form .add {
+    justify-content: space-between;
+}
+
+.input-add {
+    
+    margin-bottom: 15px;
+}
+
+.name {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.input-add input {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 15px;
+    font-size: 16px;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.input-add input:focus,
+.input-add input:valid {
+    border-color: #c79760;
+}
+
+.input-add select {
+    height: 45px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #faf6f6;
+    padding-left: 15px;
+    font-size: 16px;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.input-add select:valid {
+    border-color: #c79760;
+}
+
+.button-add {
+    height: 45px;
+    margin: 45px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.button-add input {
+    height: 100%;
+    outline: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 6px;
+    border-radius: 10px;
+    letter-spacing: 1px;
+    background-color: #c79760;
+    cursor: pointer;
+    
+}
+
+.button-add input:hover {
+    background-color: transparent;
+    border: 1px dashed #c79760;
+    color: #c79760;
+
+}
+
+input[type="file"]:empty {
+    cursor: pointer;
+    padding-top: 10px;
+}
+
+.file {
+    background-color: #fff;
+    border: #c79760 1px solid;
+    color: #100f0f;
+    font-size: 29px;
+    text-align: center;
+    margin-top: 25px;
+    border-radius: 5px;
+    height: 45px;
+
+}
+
+.check-error {
+    color: red;
+    font-size: 15px;
+    text-align: left;
+}
+
+.navbar {
+    position: fixed;
+    /* hoặc fixed */
+    /* Cho navbar nó 1 vị trí cố định */
+    top: 0;
+    /* Để nó luôn ở vị trí trên cùng */
+    left: 0;
+    width: 100%;
+    background: #f5f5f5;
+    z-index: 9;
+    /* Đặt chỉ mục cao nhất để thanh điều hướng luôn ở trên cùng */
+}
+
+.nav {
+    padding: 10px 10vw;
+    display: flex;
+    /* Tạo khoảng cách giữa logo và hộp tìm kiếm*/
+    justify-content: space-between;
+}
+
+/* Tạo chiều cao cho logo */
+.brand-logo {
+    height: 80px;
+    cursor: pointer;
+}
+
+.nav-items {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search {
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+    width: 300px;
+    position: relative;
+    /* margin-right: 50px;
+    align-items: center; */
+    border-radius: 5px;
+}
+
+#search_form {
+    display: flex;
+    width: 100%;
+}
+
+.search-box {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    /* border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px; */
+    border: 1px solid #d1d1d1;
+    text-transform: capitalize;
+    background: none;
+    color: #a9a9a9;
+    outline: none;
+}
+
+.search span i {
+    position: absolute;
+    right: -5px;
+}
+
+.search-btn {
+    padding: 0;
+    position: absolute;
+    right: -5px;
+    margin-right: 5px;
+}
+
+.nav-icons a i {
+    padding: 0;
+    height: 30px;
+}
+
+/* .search-btn .search-btn-icon {
+    width: 10%;
+    height: 20%;
+    text-align: center;
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-left: 15px;
+}  */
+
+/* Cho chữ nhập ô input có màu */
+.search-box::placeholder {
+    color: rgb(207, 9, 9);
+}
+
+.nav-icons {
+    margin: 0 5px 0 5px;
+    display: inline-flex;
+}
+
+/* .nav-icons p {
+    width: 100%;
+    height: 40px;
+    padding: 10px 10px 10px 10px;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #c79760;
+    border-radius: 5px;
+    color: #fff;
+    margin-right: 5px;
+}  */
+
+.nav-items i {
+    height: 40px;
+    padding: 10px 10px 10px 10px;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #c79760;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.nav-icons a {
+    text-decoration: none;
+    height: 40px;
+    padding: 10px 10px 10px 10px;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #c79760;
+    border-radius: 5px;
+    color: #fff;
+    margin-right: 5px;
+}
+
+.links-container {
+    width: 100%;
+    display: flex;
+    padding: 10px 10vw;
+    justify-content: center;
+    list-style: none;
+    border-top: 1px solid #d1d1d1;
+    background-color: #c79760;
+    font-weight: 500;
+}
+
+.link {
+    text-transform: capitalize;
+    padding: 0 10px;
+    margin: 0 5px;
+    text-decoration: none;
+    color: black;
+    transition: 0.5s;
+}
+
+
+/* Footer */
+footer {
+    position: relative;
+    /* đặt vị trí tương đối cho nó */
+    width: 100%;
+    background-color: #0c0907;
+    padding-bottom: 80px;
+    padding: 10px 10vw;
+    margin-top: 50px;
+}
+
+.footer-logo {
+    display: flex;
+    /* Giúp các thành phần linh hoạt. */
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.footer-logo .logo {
+    height: 100px;
+}
+
+.footer-content {
+    width: 100%;
+    display: flex;
+    margin-right: 10px;
+    justify-content: space-between;
+}
+
+.footer-desc {
+    list-style: none;
+    color: #fff;
+}
+
+.about-us-name {
+    font-size: 25px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.about-us {
+    font-size: 15px;
+    display: block;
+    margin-top: 10px;
+}
+
+.about-us a {
+    color: white;
+}
+
+.about-us i {
+    font-size: 15px;
+    margin: 5px 5px;
+}
+
+.about-us-name .about-us {
+    margin: 50px;
+}
+
+.footer-container {
+    width: 25%;
+    height: 100%;
+    margin: 30px;
+}
+
+.icons-list {
+    padding: 5px;
+}

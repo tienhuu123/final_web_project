@@ -1,0 +1,115 @@
+.product-details {
+    width: 100%;
+    padding: 60px 10vw;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 100px;
+}
+
+.image-slider {
+    width: 500px;
+    height: 500px;
+    position: relative;
+    background-size: cover;
+
+
+}
+
+.product-details img {
+    width: 500px;
+    object-fit: cover;
+    cursor: pointer;
+
+}
+
+.details {
+    width: 50%;
+}
+
+.details .product-title {
+    font-size: 30px;
+
+}
+
+.details .product-title {
+    font-size: 25px;
+    line-height: 30px;
+    height: auto;
+    margin: 15px 0 30px;
+}
+
+.product-price {
+    color: red;
+    font-size: 20px;
+}
+
+.product-sub-heading {
+    font-size: 30px;
+    text-transform: uppercase;
+    margin: 60px 0 10px;
+    font-weight: 300;
+
+}
+
+.size-radio-btn {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    font-size: 20px;
+    border: 2px solid #c79760;
+    border-radius: 50%;
+    margin: 10px;
+    margin-left: 0;
+    line-height: 80px;
+    color: black;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.size-radio-btn.check {
+    background: #ccc;
+}
+
+.cart-btn {
+    width: 50%;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #c79760;
+    border: 1px solid #c79760;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    text-transform: capitalize;
+    margin: 0px 0px;
+    cursor: pointer;
+    font-size: 20px;
+    text-decoration: none;
+
+}
+.product-price a:hover {
+    color: white;
+    background-color: red;
+}
+
+
+.cart-btn:hover {
+    color: white;
+}
+
+
+.cart-btn i {
+    margin: 0px 5px;
+}
+
+.details-des {
+    padding: 0 10vw;
+    text-transform: capitalize;
+
+}
+
+.heading {
+    font-style: 30px;
+    margin-bottom: 30px;
+}

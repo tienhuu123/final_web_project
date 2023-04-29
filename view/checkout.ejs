@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="stylesheet" href="/public/css/checkout.css">
+    <link rel="stylesheet" href="/public/fonts/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.min.css">
+
+
+    <title>Cart</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <!-- Gán thanh điều hướng qua file nav.js -->
+        <div class="nav">
+            <a href="/"><img src="/public/image/logo.png" class="brand-logo" alt=""></a>
+            <div class="nav-items">
+
+
+                <div class="search">
+                    <form action="/search" method="get" id="search_form">
+                        <input type="text" name="search" class="search-box" placeholder="search brand, product">
+                        <button class="search-btn" onclick="handlesubmit()">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+
+
+
+                </div>
+
+                <div class="nav-icons">
+                
+                    <a href="user/cartdetail"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <% if(typeof user=='undefined' ) { %>
+                        <a href="/login">Login</a>
+                        <% }else{ %>
+                
+                            <%- (user.isAdmin ||user.isManager) ? "<a href='/admin/dashboard'>Dashboard</a>" :"" %>
+                                <a href="">
+                                    <%= user.username %>
+                                </a>
+                                <a href="/logout"> Logout</a>
+                                <% } %>
+                </div>
+            </div>
+        </div>
+        <ul class="links-container">
+            <li class="link-item "><a href="/" class="link ">home</a></li>
+            <li class="link-item "><a href="/product" class="link  ">product<a></li>
+            <li class="link-item"><a href="/blog" class="link">blog</a></li>
+            <li class="link-item"><a href="/contact" class="link">contact</a></li>
+        
+        </ul>
+    </nav>
+
+
+    <div class="checkout">
+        <div class="cart">
+            <h1>Your Order</h1>
+            <table>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+                <tr>
+                <tr>
+                    <% if(typeof product !='undefined' ){if(quantity==0){ %>
+                        <%}else{ product.map((pro,i)=>{%>
+                            <td>
+                                <%= pro.name%>
+                            </td>
+                            <td>
+                                <img src="/<%=pro.image_url %>" alt="">
+                            </td>
+                            <td>
+                                <%= pro.price %>
+                            </td>
+                            <td>
+                                <%= pro.product_quantity %>
+
+                            </td>
+                            <td>
+                                <%= pro.product_quantity * pro.price %>
+                            </td>
+                </tr>
+                <%})}}%>
+            </table>
+            <div class="total_amount">
+                <a class="btn-previous-buynow" href="/"><i class="fa-solid fa-arrow-left"></i>Continue Shopping</a>
+                Total Amount:
+                <%= typeof totalAmount !='undefined' ?totalAmount:0 %>
+
+            </div>
+
+
+        </div>
+        <form id="checkout-form" method="post">
+            <h2>Shipping Information</h2>
+            <label for="name">Name:</label>
+            <input type="text" name="fullname" value='<%= typeof user !=' undefined'?user.fullname:"" %>' required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" value='<%= typeof user !=' undefined'?user.email:""%>' required>
+
+            <!-- <label for="email">Tỉnh thành:</label>
+            <select id="province-select"></select>
+
+            <label for="email">Quận/Huyện:</label>
+            <select id="province-select"></select> -->
+
+
+            <div class="province-full">
+                <label for="">Province</label><select id="province" name="city">
+                    <option value="">Select province/city --</option>
+                </select>
+
+
+
+                <label for="">District</label> <select id="district" name="district">
+                    <option value="">Select district --</option>
+                </select>
+
+
+                <label for="">Commune</label><select id="ward" name="ward">
+                    <option value="">Select ward --</option>
+                </select>
+            </div>
+
+
+
+
+            <input type="hidden" name="cartid" value='<%= typeof product !=' undefined'?product[0].cartid:""%>'>
+            <label for="shipping-address">Address:</label>
+            <input id="shipping-address" name="address" value='<%= typeof user !=' undefined'?user.adress:""%>'
+            required></input>
+            <label for="billing-address">Phone:</label>
+            <input id="billing-address" name="phone" value='<%= typeof user !=' undefined'?user.phone:""%>'
+            required></input>
+            <label for="billing-address">Note:</label>
+            <input type="text" id="note">
+            <h3 for="billing-address">Hình thức thanh toán:</h3>
+            <div class="payment">
+                <input type="radio" value="code" name="type" checked>
+                <label for="">Ship COD</label>
+                <input type="radio" name="type" value="momo">
+                <label for="">MOMO</label>
+               
+            </div>
+
+
+
+            <button class="payment-btn" type="submit">Payment</button>
+
+        </form>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+
+        // const provinceSelect = document.getElementById('province-select');
+        // 
+        // axios.get('https://provinces.open-api.vn/api/')
+
+        // .then(response => {
+        //     console.log(response)
+        //     const provinces = response.data;
+        //     provinces.forEach(province => {
+        //         const option = document.createElement('option');
+        //         option.value = province.name;
+        //         option.text = province.name;
+
+        //         provinceSelect.add(option);
+
+        //     });
+        // })
+
+
+        // .catch(error => {
+        //     console.log(error);
+        // });
+        fetch('https://provinces.open-api.vn/api/p/')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                // Add all provinces/cities to dropdown list
+                var provinceDropdown = document.getElementById("province");
+                data.forEach(function (province) {
+                    var option = document.createElement("option");
+                    option.value = province.code;
+                    option.text = province.name;
+                    provinceDropdown.add(option);
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        // When province/city is selected, get API of districts
+        document.getElementById("province").addEventListener("change", function () {
+            var provinceCode = this.value;
+            if (provinceCode === "") {
+                return;
+            }
+
+            fetch('https://provinces.open-api.vn/api/p/' + provinceCode + '?depth=2')
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    // Remove old districts
+                    var districtDropdown = document.getElementById("district");
+                    districtDropdown.innerHTML = "<option value=''>-- Select district --</option>";
+                    // Add new districts
+                    data.districts.forEach(function (district) {
+                        var option = document.createElement("option");
+                        option.value = district.code;
+                        option.text = district.name;
+                        districtDropdown.add(option);
+                    });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+        });
+
+        // When district is selected, get API of wards
+        document.getElementById("district").addEventListener("change", function () {
+            var districtCode = this.value;
+            if (districtCode === "") {
+                return;
+            }
+
+            fetch('https://provinces.open-api.vn/api/d/' + districtCode + '?depth=2')
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    // Remove old wards
+                    var wardDropdown = document.getElementById("ward");
+                    wardDropdown.innerHTML = "<option value=''>-- Select ward --</option>";
+                    // Add new wards
+                    data.wards.forEach(function (ward) {
+                        var option = document.createElement("option");
+                        option.value = ward.code;
+                        option.text = ward.name;
+                        wardDropdown.add(option);
+                    });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+
+
+
+    </script>
+    <footer>
+        <div class="footer-logo">
+            <img src="/public/image/logo.png" class="logo" alt="">
+        </div>
+
+        <div class="footer-content">
+            <div class="footer-container">
+                <ul class="footer-desc">
+                    <h3 class="about-us-name">About</h3>
+                    <li class="about-us"><i class="fa-solid fa-location-dot"></i>142 Tân Qúy</li>
+                    <li class="about-us"><i class="fa-solid fa-phone"></i> +84 376328545</li>
+                    <li class="about-us"><i class="fa-solid fa-envelope"></i> vothanhnamphuong20@gmail.com
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-container">
+                <ul class="footer-desc">
+                    <h3 class="about-us-name">have a question?</h3>
+                    <li class="about-us"><i class="fa-solid fa-location-dot"></i>142 Tân Qúy</li>
+                    <li class="about-us"><i class="fa-solid fa-phone"></i> +84 376328545</li>
+                    <li class="about-us"><i class="fa-solid fa-envelope"></i> vothanhnamphuong20@gmail.com
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-container">
+                <ul class="footer-desc">
+                    <h3 class="about-us-name">have a question?</h3>
+                    <li class="about-us"><i class="fa-solid fa-location-dot"></i>142 Tân Qúy</li>
+                    <li class="about-us"><i class="fa-solid fa-phone"></i> +84 376328545</li>
+                    <li class="about-us"><i class="fa-solid fa-envelope"></i> vothanhnamphuong20@gmail.com
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-container">
+                <ul class="footer-desc">
+                    <h3 class="about-us-name">Contact</h3>
+                    <li class="about-us"><i class="fa-solid fa-location-dot"></i>Lorem ipsum, dolor sit amet
+                        consectetur adipisicing elit. Optio nam mollitia ut doloribus iusto laudantium
+                        tempore reprehenderit quae, ipsa minima rerum consequuntur, eaque qui veniam, alias
+                        voluptates officiis possimus molestiae.</li>
+                    <li class="about-us"><i class="fa-solid fa-phone"></i> +84 376328545</li>
+                    <li class="about-us"><i class="fa-solid fa-envelope"></i> vothanhnamphuong20@gmail.com
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+
+
+
+    </footer>
+</body>
+
+</html>

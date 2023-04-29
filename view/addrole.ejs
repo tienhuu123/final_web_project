@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/public/css/addcategory.css">
+    <link rel="stylesheet" href="/public/fonts/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.min.css">
+
+    <title>Add Role</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <!-- Gán thanh điều hướng qua file nav.js -->
+        <nav class="navbar">
+            <!-- Gán thanh điều hướng qua file nav.js -->
+            <div class="nav">
+                <a href="/"><img src="/public/image/logo.png" class="brand-logo" alt=""></a>
+                <div class="nav-items">
+                    <div class="search">
+
+                        <input type="text" class="search-box" placeholder="search brand, product">
+                        <span><i class="fa-solid fa-magnifying-glass"></i></span>
+
+                        <!-- <button class="search-btn">
+                            <i class="search-btn-icon fa-solid fa-magnifying-glass"></i>
+                        
+                        </button> -->
+
+                    </div>
+
+                    <div class="nav-icons">
+                    
+                        <a href="user/cartdetail"><i class="fa-solid fa-cart-shopping"></i></a>
+                        <% if(typeof user=='undefined' ) { %>
+                            <a href="/login">Login</a>
+                            <% }else{ %>
+                    
+                                <%- (user.isAdmin ||user.isManager) ? "<a href='/admin/dashboard'>Dashboard</a>" :"" %>
+                                    <a href="">
+                                        <%= user.username %>
+                                    </a>
+                                    <a href="/logout"> Logout</a>
+                                    <% } %>
+                    </div>
+                </div>
+            </div>
+            <ul class="links-container">
+                <li class="link-item "><a href="/" class="link ">home</a></li>
+                <li class="link-item "><a href="/product" class="link  ">product<a></li>
+                <li class="link-item"><a href="/blog" class="link">blog</a></li>
+                <li class="link-item"><a href="/contact" class="link">contact</a></li>
+            
+            </ul>
+        </nav>
+        <ul class="links-container">
+            <li class="link-item"><a href="/" class="link">home</a></li>
+            <li class="link-item"><a href="" class="link">women</a></li>
+            <li class="link-item"><a href="#" class="link">men</a></li>
+            <li class="link-item"><a href="#" class="link">kid</a></li>
+            <li class="link-item"><a href="#" class="link">acessories</a></li>
+
+        </ul>
+    </nav>
+    <div class="add_product">
+        <div class="title">
+            <%= typeof role!='undefined' ?"Update Role":"Add Role" %>
+        </div>
+        <form action="" method="post">
+            <div class="add">
+                <div class="input-add">
+                    <p class="check-error">
+                        <%- typeof err=='undefined' ?"":err %>
+                    </p>
+                    <% if(typeof role=="undefined" ){ %>
+                        <span class="name">Role ID</span>
+                        <input id="productid" type="text" name="id" placeholder="Enter your ID">
+                </div>
+                <% }else{%>
+                    <input type="hidden" name='id' value="<%= typeof role !="undefined"?role.id:"" %>">
+                    <input type="hidden" value="1" name="update">
+                    <%} %>
+                        <div class="input-add">
+                            <span class="name">Name</span>
+                            <input id="nameproduct" type="text" name="name" value="<%= typeof role !="undefined"?role.name:""%>"
+                            placeholder="Enter your name">
+                        </div>
+
+                        <div class="button-add">
+                            <input type="submit" value="Add new">
+                        </div>
+        </form>
+    </div>
+
+    <footer>
+        <div class="footer-logo">
+            <img src="/public/image/logo.png" class="logo" alt="">
+        </div>
+
+        <div class="footer-content">
+            <div class="footer-container">
+                <ul class="footer-desc">
+                    <h3 class="about-us-name">About</h3>
+                    <li class="about-us"><i class="fa-solid fa-location-dot"></i>142 Tân Qúy</li>
+                    <li class="about-us"><i class="fa-solid fa-phone"></i> +84 376328545</li>
+                    <li class="about-us"><i class="fa-solid fa-envelope"></i> vothanhnamphuong20@gmail.com</li>
+                </ul>
+            </div>
+            <div class="footer-container">
+                <ul class="footer-desc">
+                    <h3 class="about-us-name">have a question?</h3>
+                    <li class="about-us"><i class="fa-solid fa-location-dot"></i>142 Tân Qúy</li>
+                    <li class="about-us"><i class="fa-solid fa-phone"></i> +84 376328545</li>
+                    <li class="about-us"><i class="fa-solid fa-envelope"></i> vothanhnamphuong20@gmail.com</li>
+                </ul>
+            </div>
+            <div class="footer-container">
+                <ul class="footer-desc">
+                    <li class="about-us-name">information</li>
+                    <li class="about-us"><i class="fa-solid fa-location-dot"></i>142 Tân Qúy</li>
+                    <li class="about-us"><i class="fa-solid fa-phone"></i> +84 376328545</li>
+                    <li class="about-us"><i class="fa-solid fa-envelope"></i> vothanhnamphuong20@gmail.com</li>
+                </ul>
+            </div>
+            <div class="footer-container">
+                <ul class="footer-desc">
+                    <li class="about-us-name">contact</li>
+                    <li class="about-us"><i class="fa-solid fa-location-dot"></i>142 Tân Qúy</li>
+                    <li class="about-us"><i class="fa-solid fa-phone"></i> +84 376328545</li>
+                    <li class="about-us"><i class="fa-solid fa-envelope"></i> vothanhnamphuong20@gmail.com</li>
+                </ul>
+            </div>
+
+        </div>
+
+
+
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product -</title>
+
+    <link rel="stylesheet" href="/public/css/product_details.css">
+    <link rel="stylesheet" href="/public/css/style.css">
+
+    <link rel="stylesheet" href="/public/fonts/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- Điều hướng trang vì đã làm bên nav.js-->
+    <nav class="navbar">
+        <!-- Gán thanh điều hướng qua file nav.js -->
+        <div class="nav">
+            <a href="/"><img src="/public/image/logo.png" class="brand-logo" alt=""></a>
+            <div class="nav-items">
+
+
+                <div class="search">
+                    <form action="/search" method="get" id="search_form">
+                        <input type="text" name="search" class="search-box" placeholder="search brand, product">
+                        <button class="search-btn" onclick="handlesubmit()">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+
+
+
+                </div>
+
+                <div class="nav-icons">
+
+                    <a href="user/cartdetail"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <% if(typeof user=='undefined' ) { %>
+                        <a href="/login">Login</a>
+                        <% }else{ %>
+
+                            <%- (user.isAdmin ||user.isManager) ? "<a href='/admin/dashboard'>Dashboard</a>" :"" %>
+                                <a href="">
+                                    <%= user.username %>
+                                </a>
+                                <a href="/logout"> Logout</a>
+                                <% } %>
+                </div>
+            </div>
+        </div>
+        <ul class="links-container">
+            <li class="link-item"><a href="/" class="link">home</a></li>
+            <li class="link-item"><a href="/product" class="link">product<a></li>
+            <li class="link-item"><a href="/blog" class="link">blog</a></li>
+            <li class="link-item"><a href="#" class="link">contact</a></li>
+
+        </ul>
+    </nav>
+
+    <section class="product-details">
+
+
+        <% if(typeof product !='undefined' ){if(product.quantity==0){ %>
+
+            <% }else{ %>
+                <div class="image-slider">
+                    <img src="/<%=product.image_url %>" alt="">
+                </div>
+                <div class="details">
+                    <h2 class="product-title">
+                        <%= product.name %>
+                    </h2>
+                    <p class="product-short-des">
+                        <%= product.details %>
+                    </p>
+                    <span class="product-price">$<%= product.price %></span>
+                    <a href="/user/cart?id=<%= product.id%>" class="cart-btn">add to cart
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+                </div>
+                <% }} %>
+
+
+
+    </section>
+    <section class="details-des">
+        <h2 class="heading">description</h2>
+        <p class="des"><%= product.details %></p>
+    </section>
+
+
+    <section class="product">
+        <h2 class="product-category">best sellings</h2>
+
+
+        <div class="product-container">
+            <% if(typeof product1 !='undefined' ) { if(quantitypro==0){%>
+                <%= product1%>
+                    <%}else{ product1.map((pro,i)=>{%>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="/<%= pro.image_url %>" class="product-thumb" alt="">
+                                <a href="/user/product_details?id=<%= pro.id  %>" class="card-btn">view all</a>
+                            </div>
+                            <div class="product-info">
+                                <h2 class="product-brand">
+                                    <%= pro.name%>
+                                </h2>
+                                <p class="product-short-des">
+                                    <%= pro.details%>
+                                </p>
+                                <span class="price">
+                                    <%= pro.price%>
+                                </span>
+                            </div>
+                        </div>
+                        <%})}}%>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="footer-logo">
+            <img src="/public/image/logo.png" class="logo" alt="">
+        </div>
+
+        <div class="footer-content">
+            <div class="footer-container">
+                <ul class="footer-desc">
+                    <h3 class="about-us-name">About</h3>
+                    <li class="about-us"><i class="fa-solid fa-location-dot"></i>142 Tân Qúy</li>
+                    <li class="about-us"><i class="fa-solid fa-phone"></i> +84 376328545</li>
+                    <li class="about-us"><i class="fa-solid fa-envelope"></i> vothanhnamphuong20@gmail.com</li>
+                </ul>
+            </div>
+            <div class="footer-container">
+                <ul class="footer-desc">
+                    <h3 class="about-us-name">have a question?</h3>
+                    <li class="about-us"><i class="fa-solid fa-location-dot"></i>142 Tân Qúy</li>
+                    <li class="about-us"><i class="fa-solid fa-phone"></i> +84 376328545</li>
+                    <li class="about-us"><i class="fa-solid fa-envelope"></i> vothanhnamphuong20@gmail.com</li>
+                </ul>
+            </div>
+            <div class="footer-container">
+                <ul class="footer-desc">
+                    <li class="about-us-name">information</li>
+                    <li class="about-us"><i class="fa-solid fa-location-dot"></i>142 Tân Qúy</li>
+                    <li class="about-us"><i class="fa-solid fa-phone"></i> +84 376328545</li>
+                    <li class="about-us"><i class="fa-solid fa-envelope"></i> vothanhnamphuong20@gmail.com</li>
+                </ul>
+            </div>
+            <div class="footer-container">
+                <ul class="footer-desc">
+                    <li class="about-us-name">contact</li>
+                    <li class="about-us"><i class="fa-solid fa-location-dot"></i>142 Tân Qúy</li>
+                    <li class="about-us"><i class="fa-solid fa-phone"></i> +84 376328545</li>
+                    <li class="about-us"><i class="fa-solid fa-envelope"></i> vothanhnamphuong20@gmail.com</li>
+                </ul>
+            </div>
+
+        </div>
+
+
+
+    </footer>
+
+
+</body>
+
+</html>
